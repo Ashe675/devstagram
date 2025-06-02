@@ -1,0 +1,13 @@
+.git
+/vendor
+/node_modules
+npm-debug.log
+.env
+Dockerfile*
+docker-compose*
+*.md
+*.gitignore
+bootstrap/cache/*
+storage/logs/*
+public/hot
+public/build
