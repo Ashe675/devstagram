@@ -32,6 +32,9 @@ RUN apt-get update && apt-get install -y \
 # Activamos mod_rewrite y encabezados
 RUN a2enmod rewrite headers expires mime
 
+# Si usas proxy inverso o quieres soporte completo de X-Forwarded-Proto
+RUN a2enmod setenvif
+
 # Instalamos extensiones PHP necesarias para Laravel
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath opcache
 
