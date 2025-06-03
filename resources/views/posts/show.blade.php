@@ -5,7 +5,7 @@
 @section('content')
     <div class=" container mx-auto md:flex">
         <div class="md:w-1/2">
-            <img src="{{asset('uploads/posts' . '/' . $post->image)}}" alt=" Image of post {{ $post->title }}" class="">
+            <img src="{{asset('storage/posts' . '/' . $post->image)}}" alt=" Image of post {{ $post->title }}" class="">
             <div class="py-3 flex items-center gap-2">
                 @auth
                     <livewire:like-post :post="$post" />
@@ -79,7 +79,7 @@
                                         <a class=" shadow-sm rounded-full inline-block "
                                             href="{{route('posts.index', $comment->user->username)}}">
                                             <x-avatar class=" shadow-md"
-                                                url="{{ $comment->user->avatar ? asset('uploads/avatars/' . $comment->user->avatar) : null}}"
+                                                url="{{ $comment->user->avatar ? asset('storage/avatars/' . $comment->user->avatar) : null}}"
                                                 class="size-10" alt="Avatar of {{ $comment->user->username }}" />
                                         </a>
                                     </div>

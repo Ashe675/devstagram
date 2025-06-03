@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Posts;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
@@ -22,8 +23,16 @@ class ImageController extends Controller
 
         $imageName = Str::uuid() . '.' . $image->extension();
 
-       // Crear el path final
-        $imagePath = public_path("uploads/posts/" . $imageName);
+        // Crear el path final
+        $imagePath = storage_path("/app/public/posts/" . $imageName);
+
+
+        // Crear la carpeta si no existe
+        $directory = dirname($imagePath);
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true); // true -> crea todas las carpetas necesarias
+        }
 
         // Crear instancia del manager con el driver GD
         $manager = new ImageManager(new Driver());
@@ -47,14 +56,21 @@ class ImageController extends Controller
 
     public function storeAvatar(Request $request, $user)
     {
-        
+
 
         $image = $request->file('file');
 
         $imageName = Str::uuid() . '.' . $image->extension();
 
         // Crear el path final
-        $imagePath = public_path("uploads/avatars/" . $imageName);
+        $imagePath = storage_path("/app/public/avatars/" . $imageName);
+
+        // Crear la carpeta si no existe
+        $directory = dirname($imagePath);
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true); // true -> crea todas las carpetas necesarias
+        }
 
         // Crear instancia del manager con el driver GD
         $manager = new ImageManager(new Driver());
@@ -69,5 +85,28 @@ class ImageController extends Controller
         $serverImage->save($imagePath);
 
         return response()->json(['image' => $imageName], 201);
+    }
+    public function deleteAvatar($filename)
+    {
+        $filePath = "avatars/" . $filename;
+
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+            return response()->json(['message' => 'Avatar eliminado correctamente'], 200);
+        }
+
+        return response()->json(['message' => 'Archivo no encontrado'], 404);
+    }
+
+    public function deletePostImage($filename)
+    {
+        $filePath = "posts/" . $filename;
+
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+            return response()->json(['message' => 'Imagen del post eliminada', 'deleted' => true], 200);
+        }
+
+        return response()->json(['message' => 'Archivo no encontrado', 'deleted' => false], 404);
     }
 }

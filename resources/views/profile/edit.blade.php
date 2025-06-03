@@ -26,7 +26,7 @@
     <div class=" container max-w-4xl mx-auto md:flex md:justify-center md:items-center bg-white p-5 rounded-lg shadow-lg">
         <div class=" md:w-1/2 m-5">
             <div id="current-image-section" class=" mt-5 relative">
-                <x-avatar url="{{ auth()->user()->avatar ? asset('uploads/avatars/' . auth()->user()->avatar) : null }}"
+                <x-avatar url="{{ auth()->user()->avatar ? asset('storage/avatars/' . auth()->user()->avatar) : null }}"
                     alt="Avatar of {{ auth()->user()->username }}" />
                 <button id="btn-edit-image"
                     class=" bg-white shadow hover:bg-gray-50 p-2 rounded-full text-gray-500 hover:text-gray-700 transition-colors absolute right-1/4 bottom-0">
@@ -86,7 +86,7 @@
 
 @push('scripts')
     <script type="module">
-        const dropzone = initDropzone('/uploads/avatars');
+        const dropzone = initDropzone('/storage/avatars');
 
         const btnEditImage = document.querySelector('#btn-edit-image');
         const editImageSection = document.querySelector('#edit-image-section');

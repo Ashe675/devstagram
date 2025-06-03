@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -13,7 +14,8 @@ class PostController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(User $user){
+    public function index(User $user)
+    {
 
         $posts = $user->posts()->latest()->paginate(10);
 
@@ -27,7 +29,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $data = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
@@ -70,13 +72,12 @@ class PostController extends Controller
 
         $post->delete();
 
-        $imagePath = public_path('uploads/posts/' . $post->image);
+        $filePath = 'posts/' . $post->image;
 
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
         }
 
         return redirect()->route('posts.index', auth()->user()->username)->with('success', 'Post deleted successfully!');
     }
-
 }

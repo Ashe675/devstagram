@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -35,9 +36,17 @@ class ProfileController extends Controller
         }
 
         $user->username = $data['username'];
+        
         if (isset($image)) {
+            if ($user->avatar) {
+                $filePath = "avatars/" . $user->avatar;
+                if (Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                }
+            }
             $user->avatar = $image;
         }
+
         $user->save();
 
         return redirect()->route('posts.index', $user->username)->with('success', 'Profile updated successfully.');
