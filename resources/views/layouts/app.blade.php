@@ -71,10 +71,8 @@
     </footer>
 
 
-    @livewireScripts
+    
     <script type="module">
-        import { showAlert } from "{{ Vite::asset('resources/js/components/alert.js') }}";
-
         const error = '{{ session('error') }}';
         const success = '{{ session('success') }}';
 
@@ -87,7 +85,7 @@
         }
     </script>
     @stack('scripts')
-
+    @livewireScripts
 </body>
 
 </html>

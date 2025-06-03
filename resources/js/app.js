@@ -1,9 +1,7 @@
 import "./bootstrap";
-
-import { initConfirmDelete } from "./components/confirmDelete";
-
-// Inicializar componentes
-initConfirmDelete();
+import "./components/alert";
+import "./components/confirmDelete";
+import "./components/dropzone";
 
 window.addEventListener("beforeunload", () => {
     document.getElementById("page-loader").classList.remove("hidden");
