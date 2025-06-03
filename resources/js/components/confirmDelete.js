@@ -1,4 +1,4 @@
-export function initConfirmDelete() {
+function initConfirmDelete() {
     document.addEventListener('DOMContentLoaded', () => {
         const deleteForms = document.querySelectorAll('.delete-form');
 
@@ -27,3 +27,5 @@ export function initConfirmDelete() {
         });
     });
 }
+
+window.initConfirmDelete = initConfirmDelete;

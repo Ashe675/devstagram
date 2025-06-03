@@ -86,7 +86,6 @@
 
 @push('scripts')
     <script type="module">
-        import { initDropzone } from '{{ Vite::asset('resources/js/components/dropzone.js') }}';
         const dropzone = initDropzone('/uploads/avatars');
 
         const btnEditImage = document.querySelector('#btn-edit-image');

@@ -26,7 +26,6 @@
 
 @push('scripts')
     <script type="module">
-        import { initDropzone } from '{{ Vite::asset('resources/js/components/dropzone.js') }}';
         initDropzone();
     </script>
 @endpush

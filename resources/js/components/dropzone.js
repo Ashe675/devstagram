@@ -1,4 +1,4 @@
-export function initDropzone(path = '/uploads/posts/') {
+function initDropzone(path = '/uploads/posts/') {
     const dropzoneElement = document.getElementById("dropzone");
     if (!dropzoneElement) return;
 
@@ -34,3 +34,5 @@ export function initDropzone(path = '/uploads/posts/') {
 
     return dropzone;
 }
+
+window.initDropzone = initDropzone;

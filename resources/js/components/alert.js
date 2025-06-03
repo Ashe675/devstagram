@@ -1,4 +1,4 @@
-export function showAlert(type, title, text) {
+function showAlert(type, title, text) {
     window.Swal.fire({
         icon: type,
         title: title,
@@ -7,3 +7,5 @@ export function showAlert(type, title, text) {
         confirmButtonColor: type === 'error' ? '#d33' : '#3085d6',
     });
 }
+
+window.showAlert = showAlert;

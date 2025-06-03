@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     curl \
+    libmagickwand-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Activamos mod_rewrite y encabezados
@@ -33,6 +34,9 @@ RUN a2enmod rewrite headers expires mime
 
 # Instalamos extensiones PHP necesarias para Laravel
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath opcache
+
+# Instalar extensión imagick
+RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Instalamos Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -45,19 +49,29 @@ COPY . .
 
 # Copiamos solo los archivos compilados desde la fase de build
 COPY --from=build-assets /var/www/html/public/build public/build
-COPY --from=build-assets /var/www/html/public/build/manifest.json manifest.json
+COPY --from=build-assets /var/www/html/public/build/manifest.json public/build/manifest.json
+
+COPY .docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Asegúrate de que el directorio public esté presente
+RUN mkdir -p /var/www/html/public
+
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 # Instalamos dependencias de PHP
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install
 
-# Generamos APP_KEY si no existe
-RUN cp .env.example .env || true && php artisan key:generate --force
+# Ahora generamos la APP_KEY solo si no existe
+# RUN cp .env.production .env && php artisan key:generate --force
+
+RUN php artisan storage:link 
 
 # Caché de configuración
-RUN php artisan config:cache \
-    && php artisan route:cache \
+RUN php artisan route:cache \
     && php artisan view:cache \
-    && php artisan event:cache
+    && php artisan event:cache \
+    && php artisan optimize
 
 # Exponemos puerto 80
 EXPOSE 80
