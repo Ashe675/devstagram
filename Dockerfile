@@ -70,11 +70,11 @@ RUN composer install
 
 RUN php artisan storage:link 
 
-# Caché de configuración
-RUN php artisan route:cache \
-    && php artisan view:cache \
-    && php artisan event:cache \
-    && php artisan optimize
+# # Caché de configuración
+# RUN php artisan route:cache \
+#     && php artisan view:cache \
+#     && php artisan event:cache \
+#     && php artisan optimize
 
 # Exponemos puerto 80
 EXPOSE 80
