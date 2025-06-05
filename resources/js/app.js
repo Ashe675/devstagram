@@ -10,3 +10,5 @@ window.addEventListener("beforeunload", () => {
 window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("page-loader").classList.add("hidden");
 });
+
+initConfirmDelete()

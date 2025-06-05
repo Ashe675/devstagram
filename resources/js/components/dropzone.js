@@ -1,6 +1,7 @@
-function initDropzone(path = '/uploads/posts/') {
+function initDropzone(path = '/storage/posts/') {
     const dropzoneElement = document.getElementById("dropzone");
     if (!dropzoneElement) return;
+    let filename;
 
     const dropzone = new window.Dropzone(dropzoneElement, {
         dictDefaultMessage: "Drag and drop files here or click to upload",
@@ -15,7 +16,7 @@ function initDropzone(path = '/uploads/posts/') {
         init: function () {
             const imageInput = document.getElementById("image");
             if (imageInput && imageInput.value.trim()) {
-                const filename = imageInput.value;
+                filename = imageInput.value;
                 const mockFile = { name: filename, size: 1234 };
                 this.emit("addedfile", mockFile);
                 this.emit("thumbnail", mockFile, `${path}${filename}`);
@@ -28,8 +29,30 @@ function initDropzone(path = '/uploads/posts/') {
         document.getElementById("image").value = response.image;
     });
 
-    dropzone.on("removedfile", () => {
-        document.getElementById("image").value = '';
+    dropzone.on("removedfile", async () => {
+        const type = path.includes('posts') ? 'post' : 'avatar';
+
+        const imageInput = document.getElementById("image");
+
+        if (!imageInput || !imageInput.value.trim()) return;
+
+        filename = imageInput.value;
+
+        try {
+            const res = await fetch(`/api/${type}/${filename}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status ${res.status}`);
+
+            document.getElementById("image").value = '';
+        } catch (err) {
+            console.error("Failed to delete file:", err);
+        }
+
     });
 
     return dropzone;

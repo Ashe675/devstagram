@@ -62,6 +62,10 @@ RUN mkdir -p /var/www/html/public
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
+RUN mkdir -p /var/www/html/storage/app/public/posts \
+    && chown -R www-data:www-data /var/www/html/storage \
+    && chmod -R 755 /var/www/html/storage
+
 # Instalamos dependencias de PHP
 RUN composer install
 

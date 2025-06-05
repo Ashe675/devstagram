@@ -41,7 +41,7 @@
                     <a href="{{route('posts.index', auth()->user()->username)}}"
                         class=" font-bold uppercase text-gray-600 text-sm text-center flex gap-1 items-center">
                         <x-avatar
-                            url="{{ auth()->user()->avatar ? asset('uploads/avatars/' . auth()->user()->avatar) : null }}"
+                            url="{{ auth()->user()->avatar ? asset('storage/avatars/' . auth()->user()->avatar) : null }}"
                             class="size-8" alt="Avatar of {{ auth()->user()->username }}" />
                         <span class=" font-normal">
                             {{ auth()->user()->username }} </span>

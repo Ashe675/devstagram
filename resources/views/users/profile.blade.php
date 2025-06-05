@@ -8,7 +8,7 @@
     <div class=" flex justify-center">
         <div class=" w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
             <div class=" w-8/12 lg:w-6/12 px-5">
-                <x-avatar url="{{ $user->avatar ? asset('uploads/avatars/' . $user->avatar) : null }}"
+                <x-avatar url="{{ $user->avatar ? asset('storage/avatars/' . $user->avatar) : null }}"
                     alt="Image of user {{ $user->username }}" />
             </div>
             <div class=" flex flex-col md:justify-center py-10 md:items-start md:w-8/12 lg:w-6/12 px-5">
@@ -71,7 +71,7 @@
                 @foreach ($posts as $post)
                     <div>
                         <a href="{{ route('posts.show', ["user" => $user, "post" => $post]) }}">
-                            <img src="{{ asset('/uploads/posts/' . $post->image) }}" alt="Image of post {{ $post->title }}"
+                            <img src="{{ asset('/storage/posts/' . $post->image) }}" alt="Image of post {{ $post->title }}"
                                 class=" ">
                         </a>
                     </div>
