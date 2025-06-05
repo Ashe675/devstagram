@@ -76,8 +76,10 @@ RUN php artisan storage:link
 #     && php artisan event:cache \
 #     && php artisan optimize
 
+RUN chmod +x /start.sh
+
 # Exponemos puerto 80
 EXPOSE 80
 
 # Comando final para arrancar Apache
-CMD ["apache2-foreground"]
+CMD ["/start.sh"]
