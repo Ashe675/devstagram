@@ -7,13 +7,10 @@ window.addEventListener("beforeunload", () => {
     document.getElementById("page-loader").classList.remove("hidden");
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("page-loader").classList.add("hidden");
-});
-
 initConfirmDelete();
 
 document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("page-loader").classList.add("hidden");
     const menuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
 
