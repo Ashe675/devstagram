@@ -80,6 +80,7 @@ RUN php artisan storage:link
 #     && php artisan event:cache \
 #     && php artisan optimize
 
+COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Exponemos puerto 80
