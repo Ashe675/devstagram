@@ -70,10 +70,10 @@
 
         <!-- Menú móvil -->
         <div id="mobile-menu"
-            class="sm:hidden hidden flex-col gap-3 mt-4 px-4 py-3 bg-white shadow-md rounded-lg transition-all duration-300 ease-in-out">
+            class="sm:hidden hidden space-y-2 mt-4 px-4 py-3 bg-white shadow-md rounded-lg transition-all duration-300 ease-in-out ">
             @auth
             <a href="{{ route('posts.create') }}"
-                class="flex items-center gap-2 text-gray-700 hover:text-sky-600 transition-colors">
+                class="flex items-center gap-2 text-gray-700 hover:bg-slate-100 transition-colors p-1 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -82,7 +82,7 @@
             </a>
 
             <a href="{{ route('posts.index', auth()->user()->username) }}"
-                class="flex items-center gap-2 text-gray-700 hover:text-sky-600 transition-colors">
+                class="flex items-center gap-2 text-gray-700 hover:bg-slate-100 transition-colors p-1 rounded-lg">
                 <x-avatar url="{{ auth()->user()->avatar ? asset('storage/avatars/' . auth()->user()->avatar) : null }}"
                     class="size-8" alt="Avatar of {{ auth()->user()->username }}" />
                 <span>{{ auth()->user()->username }}</span>
@@ -91,7 +91,7 @@
             <form action="{{ route('logout') }}" method="POST" class="flex">
                 @csrf
                 <button type="submit"
-                    class="flex items-center gap-2 text-red-600 hover:text-red-800 transition-colors w-full text-left">
+                    class="flex items-center gap-2 text-red-600 hover:bg-slate-100 transition-colors p-1 rounded-lg w-full text-left">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -104,7 +104,7 @@
 
             @guest
             <a href="{{ route('login') }}"
-                class="flex items-center gap-2 text-gray-700 hover:text-sky-600 transition-colors">
+                class="flex items-center gap-2 text-gray-700 hover:bg-slate-100 transition-colors p-1 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,7 +113,7 @@
                 Login
             </a>
             <a href="{{ route('register.index') }}"
-                class="flex items-center gap-2 text-gray-700 hover:text-sky-600 transition-colors">
+                class="flex items-center gap-2 text-gray-700 hover:bg-slate-100 transition-colors p-1 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
