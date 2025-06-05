@@ -29,6 +29,6 @@ class LoginController extends Controller
 
 
         $redirect = $request->input('redirect') ?? route('posts.index', auth()->user()->username);
-        return redirect()->to($redirect)->with('success', 'Logged in successfully!');
+        return redirect()->to($redirect);
     }
 }
