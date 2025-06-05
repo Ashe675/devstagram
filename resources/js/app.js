@@ -11,4 +11,24 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("page-loader").classList.add("hidden");
 });
 
-initConfirmDelete()
+initConfirmDelete();
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("animate-fadeIn");
+    });
+
+    // Opcional: cierra el menú al hacer click fuera
+    document.addEventListener("click", function (event) {
+        if (
+            !mobileMenu.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ) {
+            mobileMenu.classList.add("hidden");
+        }
+    });
+});
