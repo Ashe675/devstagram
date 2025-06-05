@@ -5,6 +5,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DevStragam - @yield('title')</title>
+    <link rel="icon" href="{{asset('img/logo.ico')}}">
+
+    <meta name="description"
+        content="@yield('meta_description', 'Share your coding projects, connect with developers, and showcase your work to the tech community.')">
+
+    <!-- Palabras clave relevantes -->
+    <meta name="keywords"
+        content="developer portfolio, coding projects, developer social network, DevStragam, code sharing, developer community">
+
+    <!-- Autor -->
+    <meta name="author" content="DevStragam Team">
+
+    <!-- Robots: cómo deben indexarse las páginas -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="{{ $title ?? 'DevStragam' }}">
+    <meta property="og:description"
+        content="@yield('meta_description', 'Share your coding projects, connect with developers, and showcase your work to the tech community.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/logo-devstragam.png') }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'DevStragam' }}">
+    <meta name="twitter:description"
+        content="@yield('meta_description', 'Share your coding projects, connect with developers, and showcase your work to the tech community.')">
+    <meta name="twitter:image" content="{{ asset('images/logo-devstragam.png') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('styles')
@@ -20,7 +50,8 @@
     </div>
     <header class="p-5 border-b bg-white shadow">
         <div class="container mx-auto flex justify-between items-center gap-4">
-            <a href="{{ route('home') }}" class="text-3xl font-black">
+            <a href="{{ route('home') }}" class="text-3xl font-black flex">
+                <img src="{{asset('img/logo.png')}}" alt="Logo" class=" size-10 ">
                 DevStragam
             </a>
 
